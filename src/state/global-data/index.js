@@ -2,14 +2,27 @@
 //
 // }
 
+const  actionsList = {
+  UPDATE_PRODUCT_PRICE:'UPDATE_PRODUCT_PRICE',
+  ADD_USER:'ADD_USER'
+}
+
 const initialState = {
-  usersList: []
+  usersList: [],
+  product: {
+    priceList: [],
+    productName:''
+  }
 }
 
 // action  { type:'', payload:''}
 
 const GlobalReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'UPDATE_PRODUCT_PRICE': {
+
+      return {...state, usersList: {...state.product,priceList:[] }}
+    }
 
     case 'GET_USERS_LIST_STORAGE': {
       const usersStorage = localStorage.getItem('users_list')
@@ -20,6 +33,8 @@ const GlobalReducer = (state = initialState, action) => {
       return {...state}
     }
     case 'ADD_USER': {
+
+      console.log(action)
       let newUser = [...state.usersList, action.payload]
       newUser = newUser.map((item, index) => {
         return {
