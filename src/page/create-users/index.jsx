@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {addUser} from '../../state/global-slice/global-slice'
 
 
 export default () => {
@@ -23,7 +24,8 @@ export default () => {
 
   const handleClick = () => {
     if (formData.address && formData.email && formData.lastName && formData.firstName) {
-      dispatch({type: 'ADD_USER', payload: formData})
+      dispatch({type: 'ADD_USER ', payload: formData})
+      dispatch(addUser(formData))
       setFormData({
         firstName: '',
         lastName: '',

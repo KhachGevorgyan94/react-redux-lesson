@@ -1,12 +1,12 @@
-// import {combineReducers} from 'redux'
-// //
-// // import AuthReducer from "../state/auth";
-// // import ProductsReducer from "../state/products";
-// //
-// const rootReducer = combineReducers({
-//   // Define a top-level state field named `todos`, handled by `todosReducer`
-//   auth: AuthReducer,
-//   products: ProductsReducer,
-// })
+import {combineReducers} from 'redux'
+import GlobalSlice from "../state/global-slice/global-slice";
+import GlobalReducer from "../state/global-data";
+
 //
-// export default rootReducer
+const rootReducer = combineReducers({
+  // Define a top-level state field named `todos`, handled by `todosReducer`
+  globalSlice: GlobalSlice,
+  globalData: GlobalReducer,
+})
+
+export default rootReducer

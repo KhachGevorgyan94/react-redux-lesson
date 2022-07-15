@@ -1,34 +1,27 @@
-// export const GlobalReducer = () => {
-//
-// }
+import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
+
+const state = {
   usersList: [],
   product: {
     priceList: [],
-    productName:''
+    productName: ''
   }
 }
 
-// action  { type:'', payload:''}
 
-const GlobalReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'UPDATE_PRODUCT_PRICE': {
-
-      return {...state, usersList: {...state.product,priceList:[] }}
-    }
-
-    case 'GET_USERS_LIST_STORAGE': {
+const globalSlice = createSlice({
+  name: 'GlobalSliceKhachik',
+  initialState: state,
+  reducers: {
+    getUsersList(state) {
       const usersStorage = localStorage.getItem('users_list')
       if (usersStorage) {
         let x = JSON.parse(usersStorage)
-        return {...state, usersList: x}
+        state.usersList = x
       }
-      return {...state}
-    }
-    case 'ADD_USER': {
-
+    },
+    addUser(state, action) {
       console.log(action)
       let newUser = [...state.usersList, action.payload]
       newUser = newUser.map((item, index) => {
@@ -37,23 +30,24 @@ const GlobalReducer = (state = initialState, action) => {
           id: index + 1
         }
       })
-
       const JSONString = JSON.stringify(newUser)
       localStorage.setItem('users_list', JSONString)
 
-      return {...state, usersList: newUser}
-    }
-    case 'DELETE_USER': {
-
+      state.usersList = newUser
+    },
+    deleteUser(state, action) {
       const newUsers = state.usersList.filter(x => x.id !== action.payload)
       localStorage.setItem('users_list', JSON.stringify(newUsers))
-
-      return {...state, usersList: newUsers}
-    }
-    default: {
-      return state
+      state.usersList = newUsers
     }
   }
-}
 
-export default GlobalReducer
+})
+
+export const {
+  getUsersList,
+  addUser,
+  deleteUser
+} = globalSlice.actions;
+
+export default globalSlice.reducer;
