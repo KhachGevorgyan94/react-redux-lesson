@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux'
-import GlobalSlice from "../state/global-slice/global-slice";
-import GlobalReducer from "../state/global-data";
+import {ProfileReducer} from "../state/profile";
 
-//
+// Added all reducers in  project  and  generate  one main reducer for Store
 const rootReducer = combineReducers({
   // Define a top-level state field named `todos`, handled by `todosReducer`
-  globalSlice: GlobalSlice,
-  globalData: GlobalReducer,
+  profileReducer:ProfileReducer,
+  // globalSlice: GlobalSlice,
+  // globalData: GlobalReducer,
 })
 
 export default rootReducer

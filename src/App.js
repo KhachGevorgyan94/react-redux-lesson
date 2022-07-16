@@ -17,7 +17,6 @@ function App() {
         <Sidebar/>
         <div className='P-admin-pages'>
           <HeaderComponent/>
-
           <div className='P-pages'>
             <Routes>
               <Route path={ROUTER_NAMES.DASHBOARD} element={<Dashboard/>}></Route>

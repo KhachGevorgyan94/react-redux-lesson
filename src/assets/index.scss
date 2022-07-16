@@ -10,10 +10,17 @@
 
 }
 
+//.root{
+//  --black: #e7e7e7
+//}
+
+$black : #e7e7e7;
+
+
 .P-sidebar-block {
   height           : 100vh;
   width            : 300px;
-  background-color : #e7e7e7;
+  background-color : $black;
   padding          : 25px 0;
 
   ul {
@@ -53,13 +60,13 @@ header {
   display     : flex;
   align-items : center;
 
-  .P-profile-image{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #999999;
-    margin-right: 20px;
+  .P-profile-image {
+    width            : 60px;
+    height           : 60px;
+    border-radius    : 50%;
+    overflow         : hidden;
+    background-color : #999999;
+    margin-right     : 20px;
   }
 }
 
@@ -80,7 +87,7 @@ header {
 
 }
 
-input {
+input.P-input {
   width         : 100%;
   height        : 40px;
   padding       : 0 15px;
@@ -89,4 +96,56 @@ input {
   outline       : none;
   border-radius : 10px;
   margin        : 10px 0;
+}
+
+.P-uploaded-image {
+  width               : 60px;
+  height              : 60px;
+  border-radius       : 10px;
+  background-position : center;
+  background-repeat   : no-repeat;
+  background-size     : cover;
+}
+
+.P-gender-form {
+  display    : flex;
+  margin-top : 10px;
+
+  label {
+    display : flex;
+
+    + label {
+      margin-left : 15px;
+    }
+
+    p {
+      margin-left : 15px;
+    }
+  }
+}
+
+.P-manage-form > p {
+  text-align : left;
+}
+
+.P-manage-form + .P-manage-form {
+  margin-top : 15px;
+}
+
+.P-manage-user {
+  display : flex;
+}
+
+.P-manage-user-box {
+  width   : 50%;
+  padding : 0 15px;
+}
+
+.P-save-changes {
+  margin-top       : 25px;
+  height           : 40px;
+  background-color : #449fdb;
+  outline          : none;
+  border           : none;
+  width: 100%;
 }

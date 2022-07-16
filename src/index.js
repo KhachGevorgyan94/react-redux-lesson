@@ -5,12 +5,20 @@ import './assets/icons/style.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import store from "./store";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+/**
+ * Add store in  provider f or  all  project  redux  connected
+ * **/
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App/>
+      <Provider store={store}>
+        <App/>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
