@@ -12,7 +12,7 @@ const ManageUser = () => {
     firstName: '',
     lastName: '',
     age: '',
-    gender: null,
+    gender:null,
     position: '',
     email: '',
     phoneNumber: '',
@@ -38,12 +38,28 @@ const ManageUser = () => {
 
   const handleChange = (e) => {
     setUserData({...user, [e.target.name]: e.target.value})
+    
   }
+  const handleRadio =(e)=>{
+    console.log(e.target.value)
+    console.log(e.target.name)
+    setUserData({...user,[e.target.name]:e.target.value})
+
+  }
+  
 
   const saveChanges = ()=>{
+
     dispatch({type:profileActions.MANAGE_USER_INFO, payload:user})
+    dispatch({type:profileActions.MANAGE_USER_PROFILE_IMAGE,payload:image})
     navigate(ROUTER_NAMES.DASHBOARD)
+    
+  
+    
+    
   }
+
+  
 
 
   return <div className='P-manage-user'>
@@ -71,11 +87,11 @@ const ManageUser = () => {
         <p>Gender</p>
         <div className='P-gender-form'>
           <label>
-            <input type="radio" name='gender'/>
+            <input onChange={handleRadio} type="radio" name='gender' value='male'/>
             <p>Male</p>
           </label>
           <label>
-            <input type="radio" name='gender'/>
+            <input onChange={handleRadio} type="radio" name='gender' value='female'/>
             <p>Female</p>
           </label>
         </div>
@@ -104,13 +120,13 @@ const ManageUser = () => {
       <div className='P-manage-form'>
         <p>Date of Birth</p>
         <label>
-          <input className='P-input' type="date" placeholder='Date of Birth'/>
+          <input onChange={handleChange} className='P-input' type="date" placeholder='Date of Birth' name = {'dateOfBirth'}/>
         </label>
       </div>
       <div className='P-manage-form'>
         <p>Profile Image</p>
         <label>
-          <input type="file"/>
+          <input onChange={uploadImage} type="file"/>
         </label>
       </div>
       <button onClick={saveChanges} className='P-save-changes'> Save Changes</button>

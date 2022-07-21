@@ -6,13 +6,14 @@ const initialState = {
     firstName: '',
     lastName: '',
     age: '',
-    gender: null,
+    gender:null,
     position: '',
     email: '',
     phoneNumber: '',
     profileImage: '',
     dateOfBirth: null
-  }
+  },
+  callBackValue:10
 }
 
 
@@ -31,9 +32,10 @@ const initialState = {
 export const ProfileReducer = (state = initialState, action) => {
   switch (action.type) {
     case profileActions.MANAGE_USER_INFO: {
-      console.log('MANAGE_USER_INFO')
+     
 
       return {...state, profile:{...state.profile, ...action.payload}}
+      
     }
     case profileActions.MANAGE_USER_GENDER: {
       console.log('MANAGE_USER_GENDER')
@@ -41,12 +43,14 @@ export const ProfileReducer = (state = initialState, action) => {
     }
     case profileActions.MANAGE_USER_PROFILE_IMAGE: {
       console.log('MANAGE_USER_PROFILE_IMAGE')
-      return {...state}
+      console.log(action)
+      return {...state,profile:{...state.profile, profileImage:action.payload}}
     }
-    case profileActions.MANAGE_USER_DATE_BIRTH: {
-      console.log('MANAGE_USER_DATE_BIRTH')
-      return {...state}
+    case 'SET_CALL_BACK_VALUE': {
+      console.log('MANAGE_USER_GENDER')
+      return {...state,callBackValue: action.payload}
     }
+    
 
     // IMPORTANT
     default: {
