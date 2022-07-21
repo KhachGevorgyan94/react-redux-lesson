@@ -40,7 +40,7 @@ const navigate=useNavigate()
   const validate=()=>{
       let isValidate = true
 
-      if(!user.firstName.length &&!user.lastName.length &&!user.lastName.length &!user.age.length &&!user.gender.length &&!user.posrtion.length &&!user.email.length &&!user.phoneNumber.length &&!user.profileImage.length &&!user.dateOfBirth.length   ){
+      if(!user.firstName.length ||!user.lastName.length ||!user.lastName.length ||!user.age.length ||!user.gender.length || !user.posrtion.length || !user.email.length || !user.phoneNumber.length ||!user.profileImage.length ||!user.dateOfBirth.length   ){
        isValidate = false
 
       }
