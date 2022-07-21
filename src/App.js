@@ -2,22 +2,37 @@ import './App.css';
 
 import Sidebar from "./components/sidebar";
 import HeaderComponent from "./components/header-component";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Dashboard from "./page/dashboard";
 import Products from "./page/products";
 import {ROUTER_NAMES} from "./routers";
 import './assets/index.scss'
 import AddProducts from "./page/add-products";
 import ManageUser from "./page/manage-user";
+import {useEffect, useState} from "react";
+import LoginUser from "./page/login-user";
 
 function App() {
+  const navigate = useNavigate()
+
+  const [token, setToken] = useState('')
+
+  useEffect(() => {
+   const login =  localStorage.getItem('token_admin')
+    if(login){
+      setToken(login)
+    }else{
+      navigate(ROUTER_NAMES.LOGIN)
+    }
+  }, [])
+
   return (
     <div className="App">
-      <div className='P-admin-section'>
+
+      {token ? <div className='P-admin-section'>
         <Sidebar/>
         <div className='P-admin-pages'>
           <HeaderComponent/>
-
           <div className='P-pages'>
             <Routes>
               <Route path={ROUTER_NAMES.DASHBOARD} element={<Dashboard/>}></Route>
@@ -27,7 +42,13 @@ function App() {
             </Routes>
           </div>
         </div>
+      </div> : <div>
+        <Routes>
+          <Route path={ROUTER_NAMES.LOGIN} element={<LoginUser/>}></Route>
+        </Routes>
       </div>
+
+      }
 
     </div>
   );

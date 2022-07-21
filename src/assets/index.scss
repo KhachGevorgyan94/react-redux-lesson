@@ -10,11 +10,21 @@
 
 }
 
+//.root{
+//  --black: #e7e7e7
+//}
+
+$orange : #f7d1a9;
+$header : #fbe7d3;
+
+
 .P-sidebar-block {
   height           : 100vh;
   width            : 300px;
-  background-color : #e7e7e7;
+  background-color : $orange;
   padding          : 25px 0;
+  text-align       : center;
+
 
   ul {
     li {
@@ -30,7 +40,7 @@
         width           : 100%;
 
         &:hover {
-          background-color : #61dafb;
+          background-color : $header;
           cursor           : pointer;
         }
       }
@@ -44,8 +54,9 @@ header {
   display          : flex;
   align-items      : center;
   justify-content  : flex-start;
-  background-color : #f1f1f1;
+  background-color : $header;
   padding          : 10px 25px;
+  text-align       : center;
 }
 
 
@@ -53,16 +64,16 @@ header {
   display     : flex;
   align-items : center;
 
-  .P-profile-image{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #999999;
-    margin-right: 20px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  .P-profile-image {
+    width               : 60px;
+    height              : 60px;
+    border-radius       : 50%;
+    overflow            : hidden;
+    background-color    : #999999;
+    margin-right        : 20px;
+    background-position : center;
+    background-repeat   : no-repeat;
+    background-size     : cover;
   }
 }
 
@@ -74,14 +85,53 @@ header {
 
 .P-pages {
   height           : calc(100vh - 100px);
-  background-color : #999999;
+  background-color : #fffdfd;
   padding          : 10px;
-  overflow-y: auto;
 }
 
 .P-dashboard {
-  height : 100%;
+  height  : 100%;
+  display : flex;
 
+}
+
+.P-image {
+  margin              : 20px;
+  width               : 250px;
+  height              : 300px;
+  background-color    : #999999;
+  background-repeat   : no-repeat;
+  background-size     : cover;
+  background-position : center;
+  border-radius       : 100px;
+}
+
+.P-info {
+  margin-left : 100px;
+  margin-top  : 20px;
+
+  p {
+    font-size : 20px;
+    margin    : 20px;
+
+  }
+
+  button {
+    width            : 100px;
+    height           : 40px;
+    margin           : 20px;
+    background-color : $header;
+    border           : 1px solid $orange;
+    border-radius    : 30px;
+    font-size        : 16px;
+
+    &:hover {
+      color            : white;
+      background-color : $orange;
+      border           : 2px solid $header;
+
+    }
+  }
 }
 
 input.P-input {
@@ -94,61 +144,157 @@ input.P-input {
   border-radius : 10px;
   margin        : 10px 0;
 }
-.P-gender-form{
-  display: flex;
-  label{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.P-uploaded-image {
+  width               : 60px;
+  height              : 60px;
+  border-radius       : 10px;
+  background-position : center;
+  background-repeat   : no-repeat;
+  background-size     : cover;
+}
+
+.P-gender-form {
+  display    : flex;
+  margin-top : 10px;
+
+  label {
+    display : flex;
+
+    + label {
+      margin-left : 15px;
+    }
+
+    p {
+      margin-left : 15px;
+    }
   }
 }
-.ADD-Users{
-   width: 75px;
-   height: 40px;
-   border-radius: 50px;
-   border: 2px solid black;
-   
+
+.P-manage-form > p {
+  text-align : left;
 }
-.ADD-Users:hover{
-  cursor: pointer;
-  color: black;
-  background: #61dafb;
-  box-shadow: #61dafb;
- }
- .G-center{
-  display: flex;
-  background-color: greenyellow;
-  width: 500px;
-  margin: 0 auto;
-  padding: 0 auto;
- }
- .P-S-image{
-  margin: 15px ;
-  width: 150px;
-  height: 175px;
-  background-color: pink;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 45px;
- }
- .Centr{
-  margin: 0 auto;
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
- }
- .G-company{
-  width:500px;
-  background-color: pink;
-  height: 500px;
- }
- .G-img{
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 100%;
-  height: 200px;
- }
+
+.P-manage-form + .P-manage-form {
+  margin-top : 15px;
+}
+
+.P-manage-user {
+  display : flex;
+}
+
+.P-manage-user-box {
+  width   : 50%;
+  padding : 0 15px;
+}
+
+.P-save-changes {
+  margin-top       : 25px;
+  height           : 40px;
+  background-color : $header;
+  outline          : none;
+  border           : none;
+  width            : 100%;
+}
+
+.P-button {
+  margin-top       : 25px;
+  height           : 40px;
+  background-color : $header;
+  outline          : none;
+  border           : none;
+  width            : 400px;
+}
+
+.product-image {
+  width               : 250px;
+  height              : 350px;
+  background-position : center;
+  background-repeat   : no-repeat;
+  background-size     : cover;
+  position            : relative;
+
+  &::after {
+
+    content          : '';
+    width            : 250px;
+    height           : 350px;
+    background-color : rgba(0, 0, 0, 0.3);
+    position         : absolute;
+    z-index          : 4;
+    left             : 0;
+    top              : 0;
+
+  }
+
+  span {
+    position  : absolute;
+    z-index   : 5;
+    font-size : 40px;
+    top       : 0;
+    right     : 0;
+    transform : rotate(135deg);
+    color     : #999999;
+
+    &:hover {
+      display : inline-block;
+      color   : black;
+    }
+  }
+}
+
+.P-box {
+  width         : 250px;
+  height        : 500px;
+  margin        : 30px;
+  border-bottom : 1px solid #999999bf;
+
+
+  h2 {
+    text-align : center;
+    margin     : 10px;
+
+  }
+
+  p {
+    margin    : 10px;
+    font-size : 18px;
+  }
+
+  &:hover {
+    border-bottom : 2px solid #6160605c;
+    box-shadow    : 0 0 10px 5px rgba(0, 0, 0, 0.3);
+
+    .P-close{
+      opacity: 1;
+      visibility: visible;
+    }
+
+  }
+}
+
+.P-dashboard-product {
+  display   : flex;
+  flex-wrap : wrap;
+}
+
+.P-full-dashboard {
+  height : 100%;
+}
+
+.P-price {
+  display : flex;
+}
+
+.delete-price {
+  text-decoration : line-through;
+}
+
+.P-close {
+  opacity    : 0;
+  visibility : hidden;
+  transition : 0.3s;
+  cursor     : pointer;
+}
+
+
