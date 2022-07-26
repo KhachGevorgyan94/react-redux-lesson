@@ -1,16 +1,17 @@
 import './App.css';
-
+import { useEffect,useState } from 'react';
 import Sidebar from "./components/sidebar";
 import HeaderComponent from "./components/header-component";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import { Route, Routes, useNavigate} from "react-router-dom";
 import Dashboard from "./page/dashboard";
 import Products from "./page/products";
 import {ROUTER_NAMES} from "./routers";
 import './assets/index.scss'
 import AddProducts from "./page/add-products";
 import ManageUser from "./page/manage-user";
-import {useEffect, useState} from "react";
-import LoginUser from "./page/login-user";
+import LoginUser from './page/login-user'
+import LoginSettings from './page/login-settings';
+import NewProducts from "./page/new-products";
 
 function App() {
   const navigate = useNavigate()
@@ -19,17 +20,15 @@ function App() {
 
   useEffect(() => {
    const login =  localStorage.getItem('token_admin')
-    if(login){
+    if(login && login === 'Razmik123'){
       setToken(login)
     }else{
       navigate(ROUTER_NAMES.LOGIN)
     }
   }, [])
-
   return (
     <div className="App">
-
-      {token ? <div className='P-admin-section'>
+       {token ? <div className='P-admin-section'>
         <Sidebar/>
         <div className='P-admin-pages'>
           <HeaderComponent/>
@@ -37,14 +36,15 @@ function App() {
             <Routes>
               <Route path={ROUTER_NAMES.DASHBOARD} element={<Dashboard/>}></Route>
               <Route path={ROUTER_NAMES.PRODUCTS} element={<Products/>}></Route>
+              <Route path={ROUTER_NAMES.LOGIN_SETTINGS} element={<LoginSettings/>}></Route>
               <Route path={ROUTER_NAMES.ADD_PRODUCT} element={<AddProducts/>}></Route>
               <Route path={ROUTER_NAMES.MANAGE_USER} element={<ManageUser/>}></Route>
+              <Route path={ROUTER_NAMES.NEW_PRODUCTS} element={<NewProducts/>}></Route>
             </Routes>
           </div>
         </div>
       </div> : <div>
         <Routes>
-
           <Route path={ROUTER_NAMES.LOGIN} element={<LoginUser/>}></Route>
         </Routes>
       </div>
