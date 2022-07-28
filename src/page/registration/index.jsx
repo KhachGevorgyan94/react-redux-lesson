@@ -1,36 +1,32 @@
-import React, { useState} from "react";
-import {useDispatch, } from "react-redux";
-import {profileActions} from "../../state/profile/actions";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ROUTER_NAMES} from "../../routers";
+import {DeleteUser, RegistrationUser} from "../../platform/api/auth";
 
-const ManageUser = () => {
- 
-  const dispatch = useDispatch()
+const Registration = () => {
   const navigate = useNavigate()
+  const [isLoading, setIsLoading] = useState(false)
   const [user, setUserData] = useState({
     firstName: '',
     lastName: '',
     age: '',
-    gender:null,
+    gender: null,
     position: '',
     email: '',
     phoneNumber: '',
     profileImage: '',
-    dateOfBirth: null
+    dateOfBirth: null,
+    password:''
   })
 
 
   const uploadImage = (e) => {
     const element = e.currentTarget
     const fileList = element.files;
-    console.log(element.files)
     if (fileList && fileList?.length) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        console.log(reader)
-     
-        setUserData({...user,profileImage:reader.result})
+        setUserData({...user, profileImage: reader.result})
       });
       reader.readAsDataURL(fileList[0]);
     }
@@ -38,20 +34,21 @@ const ManageUser = () => {
 
   const handleChange = (e) => {
     setUserData({...user, [e.target.name]: e.target.value})
-    
-  }
-  const handleRadio =(e)=>{
-    setUserData({...user,[e.target.name]:e.target.value})
-  }
-  
 
-  const saveChanges = ()=>{
-    dispatch({type:profileActions.MANAGE_USER_INFO, payload:user})
-    navigate(ROUTER_NAMES.DASHBOARD)
   }
-  return <div className='P-manage-user'>
 
-    <div className="P-manage-user-box">
+  const saveChanges = async () => {
+    const result = await RegistrationUser(user)
+    // const result = await DeleteUser('62e2c2796f047803e8aee6cf')
+    console.log(result)
+    if(result.data._id){
+      navigate(ROUTER_NAMES.LOGIN)
+    }
+  }
+
+
+  return <div className='P-login-image P-registration-page'>
+    <div className='P-registration-form'>
       <div className='P-manage-form'>
         <p>First Name</p>
         <label>
@@ -74,17 +71,15 @@ const ManageUser = () => {
         <p>Gender</p>
         <div className='P-gender-form'>
           <label>
-            <input onChange={handleRadio} type="radio" name='gender' value = 'Male'/>
+            <input onChange={handleChange} type="radio" name='gender' value='Male'/>
             <p>Male</p>
           </label>
           <label>
-            <input onChange={handleRadio} type="radio" name='gender' value = 'Female'/>
+            <input onChange={handleChange} type="radio" name='gender' value='Female'/>
             <p>Female</p>
           </label>
         </div>
       </div>
-    </div>
-    <div className="P-manage-user-box">
       <div className='P-manage-form'>
         <p>Position</p>
         <label>
@@ -107,7 +102,8 @@ const ManageUser = () => {
       <div className='P-manage-form'>
         <p>Date of Birth</p>
         <label>
-          <input onChange={handleChange} className='P-input' type="date" placeholder='Date of Birth' name = {'dateOfBirth'}/>
+          <input onChange={handleChange} className='P-input' type="date" placeholder='Date of Birth'
+                 name={'dateOfBirth'}/>
         </label>
       </div>
       <div className='P-manage-form'>
@@ -116,11 +112,14 @@ const ManageUser = () => {
           <input onChange={uploadImage} type="file"/>
         </label>
       </div>
-      <button onClick={saveChanges} className='P-save-changes'> Save Changes</button>
-
+      <div className='P-manage-form'>
+        <p>Password</p>
+        <label>
+          <input onChange={handleChange} name={'password'} className='P-input' type="password" placeholder='Password'/>
+        </label>
+      </div>
+      <button onClick={saveChanges} className='P-save-changes'> {isLoading? 'Loading...':'Register'}</button>
     </div>
-
   </div>
 }
-
-export default ManageUser
+export default Registration

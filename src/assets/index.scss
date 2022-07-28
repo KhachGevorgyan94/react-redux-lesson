@@ -254,6 +254,7 @@ input.P-input {
     right     : 0;
     transform : rotate(135deg);
     color     : #999999;
+    cursor    : pointer;
 
     &:hover {
       display : inline-block;
@@ -293,7 +294,9 @@ input.P-input {
 }
 
 .P-full-dashboard {
-  height : 100%;
+  height     : 100%;
+  overflow   : hidden;
+  overflow-y : auto;
 }
 
 .P-price {
@@ -421,13 +424,13 @@ input.P-input {
 
 }
 
-
-.P-product-box {
+.P-image-box {
   padding       : 15px;
   border-radius : 8px;
   box-shadow    : 0 0 5px 2px rgba(0, 0, 0, 0.4);
   margin        : 10px;
-  width         :  calc(25% - 20px);
+  width         : calc(25% - 20px);
+
 
   div {
     width               : 100%;
@@ -448,89 +451,112 @@ input.P-input {
   }
 }
 
-.P-products-list {
+.P-images-list {
   display   : flex;
   flex-wrap : wrap;
-}
 
 
-
-.loader {
-  perspective: 1000px;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  color: #a71c1c;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: rotateZ(45deg) ;
-
-}
-.loader:before,
-.loader:after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
-  transform: rotateX(70deg);
-  animation: 1s spin linear infinite;
-}
-.loader:after {
-  color: #0095ff;
-  transform: rotateY(70deg);
-  animation-delay: .4s;
-}
-.loader:before{
-  color: #282c34;
 }
 
-@keyframes rotate {
+.P-full-image {
+  height     : 100%;
+  overflow   : hidden;
+  overflow-y : auto;
+}
+
+.lds-ring {
+  display    : inline-block;
+  position   : relative;
+  width      : 80px;
+  height     : 80px;
+  left       : 50%;
+  margin-top : 200px;
+}
+
+.lds-ring div {
+  box-sizing    : border-box;
+  display       : block;
+  position      : absolute;
+  width         : 64px;
+  height        : 64px;
+  margin        : 8px;
+  border        : 8px solid $orange;
+  border-radius : 50%;
+  animation     : lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color  : $orange transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay : -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay : -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay : -0.15s;
+}
+
+@keyframes lds-ring {
   0% {
-    transform: translate(-50%, -50%) rotateZ(0deg);
+    transform : rotate(0deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotateZ(360deg);
+    transform : rotate(360deg);
   }
 }
 
-@keyframes rotateccw {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
+
+.G-modal-section {
+  position        : fixed;
+  width           : 100%;
+  height          : 100vh;
+  left            : 0;
+  top             : 0;
+  z-index         : 999999;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
 }
 
-@keyframes spin {
-  0%,
-  100% {
-    box-shadow: .2em 0px 0 0px currentcolor;
-  }
-  12% {
-    box-shadow: .2em .2em 0 0 currentcolor;
-  }
-  25% {
-    box-shadow: 0 .2em 0 0px currentcolor;
-  }
-  37% {
-    box-shadow: -.2em .2em 0 0 currentcolor;
-  }
-  50% {
-    box-shadow: -.2em 0 0 0 currentcolor;
-  }
-  62% {
-    box-shadow: -.2em -.2em 0 0 currentcolor;
-  }
-  75% {
-    box-shadow: 0px -.2em 0 0 currentcolor;
-  }
-  87% {
-    box-shadow: .2em -.2em 0 0 currentcolor;
+.P-background {
+  position         : absolute;
+  width            : 100%;
+  height           : 100%;
+  background-color : rgba(0, 0, 0, 0.4);
+}
+
+
+.P-delete-products {
+  padding          : 15px;
+  border-radius    : 10px;
+  background-color : white;
+  position         : relative;
+}
+
+
+.P-registration-form {
+  padding          : 15px;
+  border-radius    : 8px;
+  background-color : white;
+}
+
+.P-registration-page {
+  min-height : 100vh;
+  height     : auto;
+
+  padding: 120px 20px;
+
+  .P-registration-form{
+    max-width: 400px;
+    margin:  auto;
+    width: 100%;
+    label{
+      margin: 0;
+      input{
+        width: 100%;
+      }
+    }
   }
 }

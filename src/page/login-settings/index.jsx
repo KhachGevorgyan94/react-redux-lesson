@@ -31,8 +31,7 @@ const LoginSettings = ()=>{
         }
       }
       const saveChanges = ()=>{
-          console.log(state)
-        localStorage.setItem('sing-in-info', JSON.stringify(state));
+        localStorage.setItem('state', JSON.stringify(state));
       }
 
     
