@@ -1,15 +1,33 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import { productActions } from "../../state/product/actions";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import { ROUTER_NAMES } from "../../routers";
-import { addProductData } from "../../platform/api/auth";
+import {addProductData, GetProductDetails, ManageProductDetail} from "../../platform/api/auth";
 
 
 const AddProducts = ()=>{
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const params = useParams()
+
+  useEffect(()=>{
+    console.log(params)
+    if(params.id){
+      getDetails()
+    }
+  },[])
+
+
+  const getDetails = async ()=>{
+    const result = await GetProductDetails(params.id)
+    if(result){
+      setProductData(result.data)
+    }
+  }
+
+
   const [productData, setProductData] = useState({
     productName: '',
     message: '',
@@ -36,13 +54,21 @@ const AddProducts = ()=>{
       }
     }
     const saveChanges = async () => {
+    if(params.id){
+      const result = await ManageProductDetail(params.id,productData)
+      console.log(result)
+      if(result){
+        navigate(ROUTER_NAMES.PRODUCTS)
+      }
+    }else{
       const result = await addProductData(productData)
       // const result = await DeleteUser('62e2c2796f047803e8aee6cf')
       console.log(result)
       if(result.data._id){
-      
         navigate(ROUTER_NAMES.PRODUCTS)
       }
+    }
+
     }
   
       
@@ -50,19 +76,19 @@ const AddProducts = ()=>{
     <div className='P-manage-form'>
         <p>Product Name</p>
         <label>
-          <input onChange = {handleChange} name={'productName'} className='P-input' type="text" placeholder='Product Name'/>
+          <input value={productData.productName} onChange = {handleChange} name={'productName'} className='P-input' type="text" placeholder='Product Name'/>
         </label>
       </div>
       <div className='P-manage-form'>
         <p>Price</p>
         <label>
-          <input  onChange = {handleChange} name={'price'} className='P-input' type="number" placeholder='Price'/>
+          <input value={productData.price}  onChange = {handleChange} name={'price'} className='P-input' type="number" placeholder='Price'/>
         </label>
       </div>
       <div className='P-manage-form'>
         <p>Description</p>
         <label>
-          <input  onChange = {handleChange} name={'message'} className='P-input' type="text" placeholder='Description'/>
+          <input value={productData.message}  onChange = {handleChange} name={'message'} className='P-input' type="text" placeholder='Description'/>
         </label>
       </div>
       <div className='P-manage-form'>

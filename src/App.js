@@ -54,6 +54,7 @@ function App() {
               <Route path={ROUTER_NAMES.PRODUCTS} element={<Products/>}></Route>
               <Route path={ROUTER_NAMES.LOGIN_SETTINGS} element={<LoginSettings/>}></Route>
               <Route path={ROUTER_NAMES.ADD_PRODUCT} element={<AddProducts/>}></Route>
+              <Route path={ROUTER_NAMES.EDIT_PRODUCT} element={<AddProducts/>}></Route>
               <Route path={ROUTER_NAMES.MANAGE_USER} element={<ManageUser/>}></Route>
               <Route path={ROUTER_NAMES.NEW_IMAGES} element={<NewImages/>}></Route>
             </Routes>

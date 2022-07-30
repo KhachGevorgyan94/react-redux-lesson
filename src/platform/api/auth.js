@@ -19,19 +19,26 @@ export const GetMyAccount = (id) => {
   return  axios.get(`${ApiUrl}userRegistration/${id}`, ).catch(err=>err)
 }
 export const addProductData = async (data) =>{
+  delete data._id
   return await axios.post(`${ApiUrl}productList`,data)
 }
 export const GetProductsList = () => {
-  // return  fetch(`${ApiUrl}productList`,{
-  //   method:'GET'
-  // }).then(data=>{
-  //   return data.json()
-  // }).then(data=>{
-  //   return data
-  // })
-
   return  axios.get(`${ApiUrl}productList`, )
 }
+
+export const GetProductDetails = (id) => {
+  return  axios.get(`${ApiUrl}productList/${id}`, )
+}
+export const ManageProductDetail = (id, data) => {
+  delete data._id
+  return  axios.put(`${ApiUrl}productList/${id}`, data)
+}
+
+
 export const DeleteProduct = (id) =>{
   return axios.delete(`${ApiUrl}productList/${id}`,)
+}
+export const EditUser = (id,data) =>{
+  delete data._id
+  return axios.put(`${ApiUrl}userRegistration/${id}`,data)
 }
