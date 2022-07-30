@@ -41,12 +41,16 @@ const ManageUser = () => {
     
   }
   const handleRadio =(e)=>{
+
     setUserData({...user,[e.target.name]:e.target.value})
+
   }
   
 
   const saveChanges = ()=>{
+
     dispatch({type:profileActions.MANAGE_USER_INFO, payload:user})
+    
     navigate(ROUTER_NAMES.DASHBOARD)
   }
   return <div className='P-manage-user'>

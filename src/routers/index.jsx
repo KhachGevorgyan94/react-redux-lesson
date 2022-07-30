@@ -4,11 +4,9 @@ export const ROUTER_NAMES = {
   ADD_PRODUCT: '/add-product',
   MANAGE_USER: '/manage-user',
   LOGIN: '/login',
-  REGISTRATION: '/registration',
   LOGIN_SETTINGS:'/login-settings',
-  NEW_IMAGES:'/new-images'
+  NEW_IMAGES:'/new-images',
+  REGISTRATION: '/registration'
 }
 
-
-
-export const ApiUrl = 'https://crudcrud.com/api/72a1c9b3d3fe4ce69c6076a59aded749/'
+export const ApiUrl = 'https://crudcrud.com/api/84fde3284c044944aa9cc1fb23704d0d/'

@@ -18,3 +18,20 @@ export const GetAccountsList = () => {
 export const GetMyAccount = (id) => {
   return  axios.get(`${ApiUrl}userRegistration/${id}`, ).catch(err=>err)
 }
+export const addProductData = async (data) =>{
+  return await axios.post(`${ApiUrl}productList`,data)
+}
+export const GetProductsList = () => {
+  // return  fetch(`${ApiUrl}productList`,{
+  //   method:'GET'
+  // }).then(data=>{
+  //   return data.json()
+  // }).then(data=>{
+  //   return data
+  // })
+
+  return  axios.get(`${ApiUrl}productList`, )
+}
+export const DeleteProduct = (id) =>{
+  return axios.delete(`${ApiUrl}productList/${id}`,)
+}

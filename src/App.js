@@ -1,8 +1,8 @@
 import './App.css';
-import {useEffect, useState} from 'react';
+import { useEffect,useState } from 'react';
 import Sidebar from "./components/sidebar";
 import HeaderComponent from "./components/header-component";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import { Route, Routes, useNavigate} from "react-router-dom";
 import Dashboard from "./page/dashboard";
 import Products from "./page/products";
 import {ROUTER_NAMES} from "./routers";
@@ -12,10 +12,10 @@ import ManageUser from "./page/manage-user";
 import LoginUser from './page/login-user'
 import LoginSettings from './page/login-settings';
 import NewImages from './page/new-images';
-import Registration from "./page/registration";
 import {GetMyAccount} from "./platform/api/auth";
-import {useDispatch} from "react-redux";
-import {profileActions} from "./state/profile/actions";
+import { useDispatch } from 'react-redux';
+import Registration from './page/Registration';
+import { profileActions } from './state/profile/actions';
 
 function App() {
   const navigate = useNavigate()
@@ -31,7 +31,6 @@ function App() {
       navigate(ROUTER_NAMES.LOGIN)
     }
   }, [])
-
   const getMyAccount = async (login) => {
     const result = await GetMyAccount(login)
     if (result && result.data) {
@@ -45,7 +44,7 @@ function App() {
   }
   return (
     <div className="App">
-      {token ? <div className='P-admin-section'>
+       {token ? <div className='P-admin-section'>
         <Sidebar/>
         <div className='P-admin-pages'>
           <HeaderComponent/>
@@ -62,7 +61,7 @@ function App() {
         </div>
       </div> : <div>
         <Routes>
-          <Route path={ROUTER_NAMES.LOGIN} element={<LoginUser/>}></Route>
+          <Route path={ROUTER_NAMES.LOGIN} element={<LoginUser/>}></Route>.
           <Route path={ROUTER_NAMES.REGISTRATION} element={<Registration/>}></Route>
         </Routes>
       </div>

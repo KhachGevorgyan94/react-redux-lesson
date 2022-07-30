@@ -46,7 +46,7 @@ const LoginUser = () => {
           <input onChange={handleChange} name='email' type="text" placeholder={'Email'}/>
         </label>
         <label>
-          <input onChange={handleChange} name='password' type="text" placeholder={'Password'}/>
+          <input onChange={handleChange} name='password' type="password" placeholder={'Password'}/>
         </label>
 
         <button onClick={handleClick}>{isLoading ? 'loading...' : 'Login'}</button>

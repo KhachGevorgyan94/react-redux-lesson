@@ -5,34 +5,69 @@ import {useDispatch, useSelector} from "react-redux";
 import {productActions} from "../../state/product/actions";
 import {useState} from "react";
 import Modal from "../../components/modal";
+import {GetProductsList} from "../../platform/api/auth";
+import {DeleteProduct} from "../../platform/api/auth";
+import {useEffect} from "react";
 
 const Products = () => {
   const dispatch = useDispatch()
   const router = useNavigate()
-
+  const [product, setProduct] = useState([])
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
   const addProduct = () => {
     router(ROUTER_NAMES.ADD_PRODUCT)
   }
 
-  const product = useSelector(state => state.productReducer.product)
-  const deleteProduct = () => {
 
-    dispatch({type: productActions.DELETE_PRODUCT, payload: selectedProduct})
+  useEffect(() => {
+
+    getProductList()
+
+
+  }, [])
+
+
+  const getProductList = async () => {
+    setIsLoading(true)
+    const result = await GetProductsList()
+    if (result.data) {
+      setProduct(result.data)
+      setIsLoading(false)
+    }
+  }
+  // const getProductList = () => {
+  //   setIsLoading(true)
+  //   Promise.all([GetProductsList()]).then(data => {
+  //     if (data.length) {
+  //       setProduct(data)
+  //       setIsLoading(false)
+  //     }
+  //   })
+  // }
+
+
+  const deleteProduct = async () => {
+    const result = await DeleteProduct(selectedProduct)
+    if (result) {
+      getProductList()
+    }
     setIsOpenModal(false)
   }
 
-  const openDeleteModal = (id)=>{
+  const openDeleteModal = (id) => {
     setIsOpenModal(true)
     setSelectedProduct(id)
   }
   return <div className="P-full-dashboard">
+    <button className='P-button' onClick={addProduct}>Add Products</button>
+    {isLoading ? <div>loading.....</div> : null}
     <div className='P-dashboard-product'>
       {product.length ? product.map((item, index) => {
         return <div key={index} className='P-box'>
           <div className="product-image" style={{backgroundImage: `url('${item.productImage}')`}}>
-            <span onClick={() => openDeleteModal(item.id)}>+</span>
+            <span onClick={() => openDeleteModal(item._id)}>+</span>
           </div>
           <h2>{item.productName}</h2>
           <p>{item.message}</p>
@@ -43,14 +78,12 @@ const Products = () => {
       }) : <h1>Products List was empty</h1>}
 
     </div>
-    <button className='P-button' onClick={addProduct}>Add Products</button>
-
-    {isOpenModal ? <Modal close={()=>setIsOpenModal(false)} >
-          <div className='P-delete-products'>
-                <h3>Hastat uzum es jnjes</h3>
-            <button onClick={()=>setIsOpenModal(false)}>Voch</button>
-            <button onClick={deleteProduct}>Ayo</button>
-          </div>
+    {isOpenModal ? <Modal close={() => setIsOpenModal(false)}>
+      <div className='P-delete-products'>
+        <h3>Համոզված եք որ ուզում եք ջնջել</h3>
+        <button onClick={() => setIsOpenModal(false)}>Ոչ</button>
+        <button onClick={deleteProduct}>Այո</button>
+      </div>
 
     </Modal> : null}
 
