@@ -1,62 +1,11 @@
-import React, { useEffect, useState} from "react";
-import {useDispatch, } from "react-redux";
-import {profileActions} from "../../state/profile/actions";
-import {useNavigate} from "react-router-dom";
-import {ROUTER_NAMES} from "../../routers";
-import { useSelector } from "react-redux";
-import { EditUser } from "../../platform/api/auth";
+import React from "react";
+import useManageUser from "./use-manage-user";
 
 const ManageUser = () => {
- 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [user, setUserData] = useState({
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender:null,
-    position: '',
-    email: '',
-    phoneNumber: '',
-    profileImage: '',
-    dateOfBirth: null
-  })
-  const profile = useSelector(state => state.profileReducer.profile)
-  useEffect(() =>{
-      setUserData(profile)
 
-  },[profile])
-  
-const uploadImage = (e) => {
-    const element = e.currentTarget
-    const fileList = element.files;
-    console.log(element.files)
-    if (fileList && fileList?.length) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => {
-        console.log(reader)
-     
-        setUserData({...user,profileImage:reader.result})
-      });
-      reader.readAsDataURL(fileList[0]);
-    }
-  }
-  const manageUser = async ()=>{
-    const result = await EditUser(profile._id, user)
-    if(result){
-    navigate(ROUTER_NAMES.DASHBOARD)
-    }
+  const {user, handleChange, saveChanges, uploadImage} = useManageUser()
 
-  }
-  const handleChange = (e) => {
-    setUserData({...user, [e.target.name]: e.target.value})
-  }
-  const handleRadio =(e)=>{
-    setUserData({...user,[e.target.name]:e.target.value})
-  }
-  const saveChanges = ()=>{
-    manageUser()
-  }
+
   return <div className='P-manage-user'>
 
     <div className="P-manage-user-box">
@@ -77,6 +26,7 @@ const uploadImage = (e) => {
         <label>
           <input value = {user.age} onChange={handleChange} name={'age'} className='P-input' type="number" placeholder='Age'/>
         </label>
+        {/*{saveChanges, handleChange, user, uploadImage}*/}
       </div>
       <div className='P-manage-form'>
         <p>Gender</p>

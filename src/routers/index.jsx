@@ -10,4 +10,4 @@ export const ROUTER_NAMES = {
   REGISTRATION: '/registration'
 }
 
-export const ApiUrl = 'https://crudcrud.com/api/0cc4e3a78e254f5a83fcf905dedeee2b/'
+export const ApiUrl = 'https://crudcrud.com/api/ea068de81ee64893ad0ddb5d8af91c22/'
