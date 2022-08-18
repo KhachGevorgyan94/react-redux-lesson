@@ -32,6 +32,14 @@ const AddProducts = () => {
     }, {
       name: `Car Products`,
       id: 6
+    },
+    {
+      name: `Sports and Entertainment`,
+      id: 7
+    },
+    {
+      name: `Home & Pet Products`,
+      id: 8
     }
   ]
 
